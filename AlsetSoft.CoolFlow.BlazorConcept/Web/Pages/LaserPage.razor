@@ -1,0 +1,12 @@
+﻿@page "/Laser/{Id}"
+@using AlsetSoft.CoolFlow.BlazorConcept.Web.Components
+@rendermode InteractiveServer
+
+<PageTitle>Лазерний датчик @Id</PageTitle>
+
+    <div class="div-block-6">
+        <ChartFirstComponent Fullness="@Fullness" UnFullness="@UnFullness" />
+        <ChartSecondComponent Fullness="@Fullness" UnFullness="@UnFullness" Title="Перша секція" Description="Моршинська 0.33л / 0.5л" />
+        <ChartSecondComponent Fullness="@Fullness" UnFullness="@UnFullness" Title="Друга секція" Description="Моршинська 0.5л / 0.75л" />
+    </div>
+    

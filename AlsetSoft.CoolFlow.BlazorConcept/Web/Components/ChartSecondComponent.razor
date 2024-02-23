@@ -1,0 +1,19 @@
+﻿<div class="chart__second">
+    <h1 class="heading">@Title</h1>
+    <div class="div-block">
+        <RadzenChart class="div-block-2-copy" Style="height: 164px">
+            <RadzenLegend Visible="false" />
+            <RadzenChartTooltipOptions Visible="false" />
+            <RadzenDonutSeries Data="@ChartData" ValueProperty="Value" CategoryProperty="" Title=" " TotalAngle="360" StartAngle="0" Fills="@(ChartData.Select(item => item.Color).ToArray())">
+                <TitleTemplate>
+                    <div class="rz-donut-content">
+                        <div>@((int)Fullness + " %")</div>
+                    </div>
+                </TitleTemplate>
+            </RadzenDonutSeries>
+        </RadzenChart>
+        <div class="div-block-3-copy">
+            <div class="text-block-3-copy">@Description</div>
+        </div>
+    </div>
+</div>
