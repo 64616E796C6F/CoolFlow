@@ -23,6 +23,12 @@ namespace AlsetSoft.CoolFlow.BlazorConcept.Web.Pages
         public double Fullness { get; set; }
         public double UnFullness { get; set; }
 
+        public double Fullness1 { get; set; }
+        public double UnFullness1 { get; set; }
+
+        public double Fullness2 { get; set; }
+        public double UnFullness2 { get; set; }
+
         protected override void OnInitialized()
         {
             if (int.TryParse(Id, out int id))
@@ -59,6 +65,12 @@ namespace AlsetSoft.CoolFlow.BlazorConcept.Web.Pages
 
             Fullness = (Helper.MaxDistance - overallAverage) / Helper.MaxDistance * 100; // заповненість 99.33
             UnFullness = 100 - Fullness;
+
+            Fullness1 = (Helper.MaxDistance - averageValues[0]) / Helper.MaxDistance * 100;
+            UnFullness1 = 100 - Fullness1;
+
+            Fullness2 = (Helper.MaxDistance - averageValues[1]) / Helper.MaxDistance * 100;
+            UnFullness2 = 100 - Fullness2;
         }
 
         private async void Data_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
