@@ -22,11 +22,6 @@ namespace AlsetSoft.CoolFlow.BlazorConcept.Web.Components
         [Parameter]
         public string Description { get; set; }
 
-        public List<ChartData> ChartData { get; set; } = new();
-
-        protected override void OnInitialized()
-        {
-            ChartData = new() { new() { Value = UnFullness, Color = "#B7B7B7" }, new() { Value = Fullness, Color = "#4657EF" } };
-        }
+        public List<ChartData> ChartData => new() { new() { Value = UnFullness, Color = "#B7B7B7" }, new() { Value = Fullness, Color = "#4657EF" } };
     }
 }

@@ -1,7 +1,9 @@
-﻿using AlsetSoft.CoolFlow.BlazorConcept.Services;
+﻿using AlsetSoft.CoolFlow.BlazorConcept.Models;
+using AlsetSoft.CoolFlow.BlazorConcept.Services;
 using AlsetSoft.CoolFlow.BlazorConcept.Web.Models;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 
 namespace AlsetSoft.CoolFlow.BlazorConcept.Web.Pages
@@ -16,6 +18,8 @@ namespace AlsetSoft.CoolFlow.BlazorConcept.Web.Pages
         [Parameter]
         public string Id { get; set; }
 
+        public DeviceMultiplexorData Data { get; set; }
+
         public double Fullness { get; set; }
         public double UnFullness { get; set; }
 
@@ -26,18 +30,9 @@ namespace AlsetSoft.CoolFlow.BlazorConcept.Web.Pages
                 var data = LaserService.GetMultiplexorData(id);
                 if (data != null)
                 {
-                    List<double> averageValues = new();
-
-                    foreach (var item in data.Data)
-                    {
-                        double averageValue = item.Values.Average();
-                        averageValues.Add(averageValue);
-                    }
-
-                    double overallAverage = averageValues.Any() ? averageValues.Average() : 0;
-
-                    Fullness = (Helper.MaxDistance - overallAverage) / Helper.MaxDistance * 100; // заповненість 99.33
-                    UnFullness = 100 - Fullness;
+                    Data = data;
+                    Data.PropertyChanged += Data_PropertyChanged;
+                    test();
                 }
                 else
                 {
@@ -48,6 +43,28 @@ namespace AlsetSoft.CoolFlow.BlazorConcept.Web.Pages
             {
                 // редірект на головну пейджу з лазерами
             }
+        }
+
+        private void test() 
+        {
+            List<double> averageValues = new();
+
+            foreach (var item in Data.Data)
+            {
+                double averageValue = item.Values.Average();
+                averageValues.Add(averageValue);
+            }
+
+            double overallAverage = averageValues.Any() ? averageValues.Average() : 0;
+
+            Fullness = (Helper.MaxDistance - overallAverage) / Helper.MaxDistance * 100; // заповненість 99.33
+            UnFullness = 100 - Fullness;
+        }
+
+        private async void Data_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            test();
+            await InvokeAsync(StateHasChanged);
         }
     }
 }

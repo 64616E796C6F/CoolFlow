@@ -1,10 +1,11 @@
 ﻿using AlsetSoft.CoolFlow.BlazorConcept.Models;
+using System.Collections.ObjectModel;
 
 namespace AlsetSoft.CoolFlow.BlazorConcept.Services
 {
     public class LaserService
     {
-        private static List<DeviceMultiplexorData> LaserMultiplexorData { get; set; } =
+        private static ObservableCollection<DeviceMultiplexorData> LaserMultiplexorData { get; set; } =
         [
             new() 
             {
@@ -30,7 +31,7 @@ namespace AlsetSoft.CoolFlow.BlazorConcept.Services
             return LaserMultiplexorData.FirstOrDefault(d => d.DeviceId == id);
         }
 
-        public List<DeviceMultiplexorData> GetMultiplexorsData()
+        public ObservableCollection<DeviceMultiplexorData> GetMultiplexorsData()
         {
             return LaserMultiplexorData;
         }
